@@ -57,4 +57,4 @@ docs/_build/
 target/
 
 # local project
-work_log.csv
+work_log.*
