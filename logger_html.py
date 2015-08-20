@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import feedparser, sys, hashlib
+import feedparser, sys, hashlib, os
 from lxml import etree
 from StringIO import StringIO
 from datetime import datetime
@@ -55,5 +55,6 @@ if __name__ == "__main__":
 		if hash not in hashes:
 			make_table_row(table, hash, entry)
 
-	with open("work_log.html", "w+") as f:
+	file_dir = os.path.dirname(os.path.realpath(__file__))
+	with open(os.path.join(file_dir, "work_log.html"), "w+") as f:
 		f.write(etree.tostring(table, pretty_print=True))

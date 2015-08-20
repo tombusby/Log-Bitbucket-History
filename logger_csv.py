@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import feedparser, sys, hashlib, csv, re
+import feedparser, sys, hashlib, csv, re, os
 
 def read_in_recorded_hashes(f):
 	f.seek(0)
@@ -23,7 +23,8 @@ if __name__ == "__main__":
 
 	feed_items = feedparser.parse("https://bitbucket.org/{}/rss/feed?token={}".format(user_id, token))
 
-	with open("work_log.csv", "a+") as f:
+	file_dir = os.path.dirname(os.path.realpath(__file__))
+	with open(os.path.join(file_dir, "work_log.csv"), "a+") as f:
 		hashes = read_in_recorded_hashes(f)
 		writer = csv.writer(f)
 		for entry in sorted(feed_items.entries, key=lambda k: k["published_parsed"]):
