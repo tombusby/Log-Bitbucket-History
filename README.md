@@ -3,7 +3,7 @@ Log Bitbucket History
 
 I find Bitbucket's RSS feed of recent history is a good tool when preparing invoices for clients. However, it only provides a limited number of the most recent items. These simple scripts are intended to allow a cron job to keep a permanent record by appending new items to an existing log as they appear.
 
-It's up to you how often you run your script, but I would suggest that once every 24h is probably sufficient.
+It's up to you how often you run your script; I used to run it once every 24h. I run it every hour now to prevent items dropping off the bottom of the RSS feed on days with busy activity.
 
 The scripts comes in two flavours: one which produces a CSV, and one which produces an HTML table. The latter preserves the links and formatting which are present in the summary section of the feed.
 
