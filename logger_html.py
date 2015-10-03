@@ -4,6 +4,10 @@ from lxml import etree
 from StringIO import StringIO
 from datetime import datetime
 
+def get_log_file_location():
+	file_dir = os.path.dirname(os.path.realpath(__file__))
+	return os.path.join(file_dir, "work_log.html")
+
 def make_table_header_row(table):
 	row = etree.SubElement(table, "tr")
 	etree.SubElement(row, "th").text = "Published"
@@ -26,7 +30,7 @@ def make_table_row(table, hash, entry):
 
 def get_existing_log():
 	try:
-		return etree.parse("work_log.html").getroot()
+		return etree.parse(get_log_file_location()).getroot()
 	except:
 		table = etree.Element("table")
 		table.attrib["border"] = "1"
@@ -55,6 +59,5 @@ if __name__ == "__main__":
 		if hash not in hashes:
 			make_table_row(table, hash, entry)
 
-	file_dir = os.path.dirname(os.path.realpath(__file__))
-	with open(os.path.join(file_dir, "work_log.html"), "w+") as f:
+	with open(get_log_file_location(), "w+") as f:
 		f.write(etree.tostring(table, pretty_print=True))
